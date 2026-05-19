@@ -1,5 +1,9 @@
 pipeline {
   agent any
+  tools {
+    jdk 'jdk21'
+    maven "maven"
+  }
     
   stages {
     stage("Clone code from GitHub") {
@@ -9,9 +13,15 @@ pipeline {
                 }
             }
         }
+
+    stage('Maven Build') {
+      steps {
+        sh 'mvn clean package'
+      }
+    }
      
   
-     stage('Build Node JS Docker Image') {
+     stage('Build Java Docker Image') {
             steps {
                 script {
                   sh 'docker build -t devopshint/java-1.0 .'
