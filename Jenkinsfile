@@ -24,7 +24,7 @@ pipeline {
      stage('Build Java Docker Image') {
             steps {
                 script {
-                  sh 'docker build -t devopshint/java-1.0 .'
+                  sh 'docker buildx build -t devopshint/java-1.0 .'
                 }
             }
         }
